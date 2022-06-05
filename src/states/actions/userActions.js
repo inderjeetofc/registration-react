@@ -12,10 +12,8 @@ export const listUsers = () => async (dispatch) => {
 }
 export const registerUser = (data) => async (dispatch) => {
     dispatch({ type: USER_CREATE_REQUEST })
-    console.log(data)
     try {
         const response = await axios.post(`https://gorest.co.in/public/v2/users?access-token=${process.env.REACT_APP_API_TOKEN}`, data)
-        console.log(response)
         dispatch({ type: USER_CREATE_SUCCESS, payload: response })
     } catch (error) {
         dispatch({ type: USER_CREATE_FAILED, payload: error })
@@ -40,12 +38,11 @@ export const userGet = (id) => async (dispatch) => {
         dispatch({ type: USER_GET_FAILED, payload: error })
     }
 }
-export const userEdit = (id) => async (dispatch) => {
+export const userEdit = (id, userData) => async (dispatch) => {
     dispatch({ type: USER_UPDATE_REQUEST })
     try {
-        const response = await axios.put(`https://gorest.co.in/public/v2/users/${id}?access-token=${process.env.REACT_APP_API_TOKEN}`)
-        console.log(response)
-        dispatch({ type: USER_UPDATE_SUCCESS, payload: response })
+        const { data } = await axios.put(`https://gorest.co.in/public/v2/users/${id}?access-token=${process.env.REACT_APP_API_TOKEN}`, userData)
+        dispatch({ type: USER_UPDATE_SUCCESS, payload: data })
     } catch (error) {
         dispatch({ type: USER_UPDATE_FAILED, payload: error })
     }

@@ -7,8 +7,9 @@ function List(props) {
     const dispatch = useDispatch()
     const { id, name, gender, email, status } = props.user
     const handleUserDelete = (e) => {
-        if (window.confirm(`Are you sure you want to delete user ${name} `))
+        if (window.confirm(`Are you sure you want to delete user ${name} `)) {
             dispatch(userDelete(id))
+        }
     }
     return (
         <>

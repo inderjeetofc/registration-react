@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { registerUser } from '../states/actions/userActions'
 
 function Registration() {
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const [inputForm, setinputForm] = useState({
         name: "",
@@ -16,8 +18,8 @@ function Registration() {
         })
     }
     const handleSubmit = (e) => {
-        e.preventDefault()
         dispatch(registerUser(inputForm))
+        navigate('/home')
     }
 
     return (
